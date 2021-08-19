@@ -8,7 +8,7 @@ class Category
     public $desc;
     public $data = [];
 
-     function LoadData(){
+    function LoadData(){
         return $this->data;
     }
     function Add(Category $category){

@@ -8,17 +8,18 @@
         <th>Action</th>
     </tr>
     <?php
-    foreach ($result as $value) {
+    foreach ($data as $value) {
         ?>
         <tr>
-            <td><?= $value->id ?></td>
-            <td><?= $value->name ?></td>
-            <td><?= $value->desc ?></td>
+            <td><?= $value[0] ?></td>
+            <td><?= $value[1] ?></td>
+            <td><?= $value[2] ?></td>
             <td>
-                <a href="index.php?c=Category&a=Edit&id=<?=$value->id?>">Edit</a>
+                <a href="index.php?c=Category&a=Edit&id=<?=$value[0]?>">Edit</a> |
+                <a href="index.php?c=Category&a=Delete&id=<?=$value[0]?>">Delete</a>
             </td>
         </tr>
-        <?
+        <?php
     }
     ?>
 </table>

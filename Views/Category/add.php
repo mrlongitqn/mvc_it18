@@ -1,9 +1,6 @@
-<form>
+<form action="index.php?c=Category&a=SaveAdd" method="POST">
     <table>
         <tr>
-            <td>Id</td>
-            <td><input type="number" name="id"></td>
-        </tr> <tr>
             <td>Name</td>
             <td><input type="text" name="name"></td>
         </tr> <tr>

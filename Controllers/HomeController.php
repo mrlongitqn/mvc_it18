@@ -3,7 +3,8 @@
 
 class HomeController
 {
-    function Index(){
-
+    function Index()
+    {
+        echo 'Tui la index cua Home';
     }
 }

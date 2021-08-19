@@ -1,14 +1,14 @@
-<form>
+<form method="post" action="index.php?c=Category&a=SaveUpdate">
     <table>
         <tr>
             <td>Id</td>
-            <td><input type="number" name="id" readonly value="<?=$category->id?>"></td>
+            <td><input type="number" name="id" readonly value="<?=$data[0]?>"></td>
         </tr> <tr>
             <td>Name</td>
-            <td><input type="text" name="name" value="<?=$category->name?>"></td>
+            <td><input type="text" name="name" value="<?=$data[1]?>"></td>
         </tr> <tr>
             <td>Desc</td>
-            <td><input type="text" name="desc" value="<?=$category->desc?>"></td>
+            <td><input type="text" name="desc" value="<?=$data[2]?>"></td>
         </tr>
         <tr>
             <td>
