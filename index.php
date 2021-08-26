@@ -1,7 +1,7 @@
 <?php
 //File mồi, nhận dữ liệu, nhận controller, action để xử lý.
 define('SYSTEM_PATH', __DIR__);
-
+require_once('common/db.php');
 $c = isset($_GET['c']) ? $_GET['c'] : 'Home';
 $a = isset($_GET['a']) ? $_GET['a'] : 'Index';
 //Tạo tên controller từ get c và gán với hậu tố Controller

@@ -7,33 +7,12 @@ class CategoryController
 
     public function __construct()
     {
-
+            $this->categoryModel = new Category();
     }
 
     function Index()
     {
-        // OOP mysqli
-        //B1: Kết nối tới hệ QTCSDL
-        $mysqli = new mysqli('localhost', 'root', '','mvc');
-        //B2: Chọn CSDL
-        //$mysqli->select_db('mvc');
-        //B3: Chọn bảng mã
-        $mysqli->query("SET NAMES 'UTF8'");
-
-        //B4: Xử lý CSDL
-        $query = 'SELECT * FROM categories';
-        $result = $mysqli->query($query);
-        $data = $result->fetch_all();
-        //B5: Dọn dẹp
-        $result->close();
-        //B6: Đóng kết nối
-        $mysqli->close();
-        //mysqli
-        //$link = mysqli_connect('hostname', 'username', 'password', 'dbname');
-        //mysql
-        //$link = mysql_connect('hostname', 'username', 'password');
-
-      //  $result = $this->categoryModel->LoadData();
+        $data = $this->categoryModel->GetList();
         require_once SYSTEM_PATH.'/Views/Category/index.php';
     }
 
@@ -45,37 +24,17 @@ class CategoryController
     function SaveAdd(){
         $name = $_POST['name'];
         $desc = $_POST['desc'];
-        $query = "INSERT INTO categories(`Name`, `Desc`) VALUES('$name', '$desc')";
-
-        //B1: Kết nối tới hệ QTCSDL
-        $mysqli = new mysqli('localhost', 'root', '','mvc');
-        //B3: Chọn bảng mã
-        $mysqli->query("SET NAMES 'UTF8'");
-
-        //B4: Xử lý CSDL
-        $result = $mysqli->query($query);
-
-        //B6: Đóng kết nối
-        $mysqli->close();
-        header('Location: http://localhost/mvc_it18/index.php?c=Category');
+        $kq = $this->categoryModel->Add($name, $desc);
+        if($kq)
+            header('Location: http://localhost/mvc_it18/index.php?c=Category');
+        else
+            header('Location: http://localhost/mvc_it18/index.php?c=Category&a=Add');
     }
 
     function Edit()
     {
         $id = $_GET['id'];
-        $query = "SELECT * FROM categories WHERE id = $id";
-        //B1: Kết nối tới hệ QTCSDL
-        $mysqli = new mysqli('localhost', 'root', '','mvc');
-        //B3: Chọn bảng mã
-        $mysqli->query("SET NAMES 'UTF8'");
-
-        //B4: Xử lý CSDL
-        $result = $mysqli->query($query);
-        $data = $result->fetch_row();
-        //Dọn dẹp
-        $result->close();
-        //B6: Đóng kết nối
-        $mysqli->close();
+        $data = $this->categoryModel->GetById($id);
         require_once SYSTEM_PATH . '/Views/Category/edit.php';
     }
 
@@ -83,34 +42,17 @@ class CategoryController
         $id = $_POST['id'];
         $name = $_POST['name'];
         $desc = $_POST['desc'];
-        $query = "UPDATE categories SET `name`='$name', `desc`='$desc' WHERE id = $id";
-        //B1: Kết nối tới hệ QTCSDL
-        $mysqli = new mysqli('localhost', 'root', '','mvc');
-        //B3: Chọn bảng mã
-        $mysqli->query("SET NAMES 'UTF8'");
-
-        //B4: Xử lý CSDL
-        $result = $mysqli->query($query);
-
-        //B6: Đóng kết nối
-        $mysqli->close();
-        header('Location: http://localhost/mvc_it18/index.php?c=Category');
+        $result = $this->categoryModel->Update($id, $name, $desc);
+        if($result)
+            header('Location: http://localhost/mvc_it18/index.php?c=Category');
+        else
+            header('Location: http://localhost/mvc_it18/index.php?c=Category&a=Update&id='.$id);
     }
 
     function Delete()
     {
         $id = $_GET['id'];
-        $query = "DELETE FROM categories WHERE id= $id";
-        //B1: Kết nối tới hệ QTCSDL
-        $mysqli = new mysqli('localhost', 'root', '','mvc');
-        //B3: Chọn bảng mã
-        $mysqli->query("SET NAMES 'UTF8'");
-
-        //B4: Xử lý CSDL
-        $result = $mysqli->query($query);
-
-        //B6: Đóng kết nối
-        $mysqli->close();
+        $this->categoryModel->Delete($id);
         header('Location: http://localhost/mvc_it18/index.php?c=Category');
     }
 }
